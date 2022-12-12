@@ -79,19 +79,6 @@ let nb_chaque ordre l=
         then aux ordre r acc
         else acc
   in aux ordre l [];; 
-(*let nb_chaque ordre l = 
-   let rec aux acc min max = 
-     if min > max then acc
-     else 
-       let count = nb_occurences min l in 
-       if count > 0 then
-         let acc' = (min, count) :: acc in 
-         aux acc' (min + 1) max (supprimer_tous min l)
-       else
-         aux acc (min + 1) max l
-   in
-   let (min, max) = min_max l in
-   aux [] min max l*) 
 let reconstituer l = 
   let rec cons l nb e acc =
     match l with
