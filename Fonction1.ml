@@ -63,7 +63,7 @@ let min_max ordre l =
     else failwith "erreur valeur de la liste"
   in mmax_aux ordre l min_liste max_liste;; 
 
-let nb_chaque ordre l=
+(*let nb_chaque ordre l=
   let rec aux ordre l acc =
     match l with
       [] -> []
@@ -78,7 +78,8 @@ let nb_chaque ordre l=
         else if ordre y (max_liste l)
         then aux ordre r acc
         else acc
-  in aux ordre l [];; 
+  in aux ordre l [];;*)
+  
 let reconstituer l = 
   let rec cons l nb e acc =
     match l with
