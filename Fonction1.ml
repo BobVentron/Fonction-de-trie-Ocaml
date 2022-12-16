@@ -78,7 +78,8 @@ let min_max ordre l =
         else if ordre y (max_liste l)
         then aux ordre r acc
         else acc
-  in aux ordre l [];;*)
+  in aux ordre l [];;
+  *)
   
 let reconstituer l = 
   let rec cons l nb e acc =
@@ -95,7 +96,7 @@ let reconstituer l =
      if l = []
      then []
      else 
-     if i=String.length l 
+     if i=  
      then l.[i]       
 then ins_aux ordre l n (i+1)  *)
 
