@@ -9,13 +9,8 @@ let rec liste_aleatoire b n =
     let k = (Random.int b) in
     k::(liste_aleatoire b (n - 1));;
 
-let l = liste_aleatoire 200 31;;
-
-(*let temps_debut = Sys.time () in
-  let _ = min_list l in
-  let temps_fin = Sys.time () in
-  temps_fin -. temps_debut;;
- *)
+let l = liste_aleatoire 5 100000 ;;
+ 
 
 (*Tri comptage*)
 let rec nb_occurences e l =
@@ -48,7 +43,7 @@ let min_max ordre l =
   in
   match l with
     x::r -> min_max_aux ordre r x x
-  | _ -> failwith("err");;
+  | _ -> failwith("Erreur min_max: il est impossible de savoir le minimun et le maximum d'une liste vide");;
 
 let nb_chaque ordre l =
   let rec nb_chaque_aux ordre l i max operateur =
@@ -63,7 +58,7 @@ let nb_chaque ordre l =
   nb_chaque_aux ordre l min max operateur;;
 
 let rec liste_element nb e = 
-  if nb<1 
+  if nb < 1 
   then []
   else e::liste_element (nb-1) e ;;
          
@@ -99,18 +94,17 @@ a2 = position du derniers element minimun trouver
  *)
 
 let min_list_indice ordre i l =
-  let rec min_list_indice_aux ordre i l a =
+  let rec min_list_indice_aux ordre i1 l i2 =
     match l with
       [] -> failwith(" Erreur min_list_indice : il n'y a pas d'élément dans la liste")
-    | x::r -> if i = (a - 1)
+    | x::r -> if i = (i2 - 1)
               then let (e, indice) = min_list ordre (x::r) in
-                   (e, indice + a)
-              else min_list_indice_aux ordre i r (a + 1)
+                   (e, indice + i2)
+              else min_list_indice_aux ordre i1 r (i2 + 1)
   in
   min_list_indice_aux ordre  i l 0;;
 (*
-a = accumulateur
-
+i2 = position du parcours de la liste
  *)
 
 let rec echange e1 i1 e2 i2 l =
@@ -126,9 +120,9 @@ let rec echange e1 i1 e2 i2 l =
                    else x::(echange e1 (i1 - 1) e2 (i2 - 1) r);;
 
 (*
-e1 = element 1
+e1 = element numero 1
 i1 = indice de l'element 1
-e2 = element 2
+e2 = element nuemro 2
 i1 = indice de l'element 2 
  *)
 
@@ -162,11 +156,11 @@ let inserer_spatule ordre l n =
          if ordre e_max x || x = e_max
          then inserer_spatule_aux ordre r n (i + 1) x (i + 1)
          else inserer_spatule_aux ordre r n (i + 1) e_max i_max
-      | _ -> failwith("err1")
+      | _ -> failwith("Erreur inserer_spatule_aux: n est trop grand")
   in
   match l with
     x::r -> inserer_spatule_aux ordre r n 0 x 0
-  | _ -> failwith("err2");;
+  | _ -> failwith("Erreur inserer_spatule: il est impossible d'inserer la spatule dans une liste vide");;
 
 let retourner_spatule l i =
   let rec retourner_spataule_rec l i i_parcours l_retourner=
@@ -175,7 +169,7 @@ let retourner_spatule l i =
     else
       match l with
         x::r -> retourner_spataule_rec r i (i_parcours + 1) (x::l_retourner)
-      | _ -> failwith("err3")
+      | _ -> failwith("Erreur retourner_spatule_rec: i est trop grand")
   in
   retourner_spataule_rec l i 0 [];;
 
@@ -242,3 +236,8 @@ let rec tri_encerclement ordre l =
   else
     let (l1, l2) = separer (encercler  ordre l) in
           fusion ordre (tri_encerclement ordre l1)  (tri_encerclement ordre l2);;
+
+let temps_debut = Sys.time () in
+  let _ = tri_selection_min (<) l in
+  let temps_fin = Sys.time () in
+  temps_fin -. temps_debut;;
