@@ -32,4 +32,5 @@ Quand la liste considérée ne contient plus qu’un seul élément, le processu
 La liste triée globale est obtenue en fusionnant, à chaque fois, le résultat du tri par encerclement des deux listes.
 
 Il est possible de convertir un fichier .tex en .pdf avec la commande (a exécuter dans un terminal): pdflatex nondufichier.tex 
+
 Attention a bien avoir pdflatex
