@@ -30,3 +30,6 @@ Dans cette méthode de tri, on commence par encercler la liste à trier, i.e. :
 Une fois l’encerclement terminé, on sépare en deux les éléments de la liste obtenue en récupérant d’une part ceux du début, et d’autre part ceux de la fin. On recommence le processus sur ces deux listes, en les enclerclant puis en les divisant en deux.
 Quand la liste considérée ne contient plus qu’un seul élément, le processus s’arrête et la renvoie telle quelle (car elle est triée).
 La liste triée globale est obtenue en fusionnant, à chaque fois, le résultat du tri par encerclement des deux listes.
+
+Il est possible de convertir un fichier .tex en .pdf avec la commande (a exécuter dans un terminal): pdflatex nondufichier.tex 
+Attention a bien avoir pdflatex
