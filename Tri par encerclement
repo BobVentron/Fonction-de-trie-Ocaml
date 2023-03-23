@@ -1,0 +1,81 @@
+(* 4: Fonction de Tri par Encerclement *)
+
+(* renverser l renverse l’ordre des éléments de l *)
+let renverser l =
+  let rec renverser_aux l l_final =
+    match l with
+      [] -> l_final
+    | x::r -> renverser_aux r (x::l_final)
+  in
+  renverser_aux l [];;
+(*
+l_final = est la liste l renversée   
+*)
+
+
+(* encercler ordre l renvoie la liste l après son encerclement selon ordre *)
+let  encercler ordre l =
+  let rec encercle_aux ordre l1 l2 acc nl=
+    match (l1, l2) with
+      x1::r1, x2::r2 -> if 1  >  acc
+                        then  if x1 = x2
+                              then (x1::nl)
+                              else nl
+                        else if ordre x1 x2
+                        then x1::encercle_aux ordre r1 r2 (acc - 1)  (x2::nl)
+                        else x2::encercle_aux ordre r1 r2 (acc - 1) (x1::nl)
+    | _ -> failwith("err")
+  in
+  encercle_aux ordre l (renverser l) ((List.length l) / 2) [];;
+(*
+acc = accumulateur pour la condition d'arrêt 
+nl = liste renversée que l'on compare à l1 et l2     
+*)
+
+
+(* separer l renvoie, sous la forme d’un couple, la liste des premiers éléments de l, et la
+liste des derniers éléments de l *)
+let separer l =
+  let rec separer l nl acc =
+    match l with
+      x::r -> if 1 > acc
+              then (renverser(nl), (x::r))
+              else separer r (x::nl) (acc-1)
+    |_ -> failwith("err")
+              
+  in
+  separer l [] ((List.length l)/2);;
+
+(*
+acc = accumulateur pour la condition d'arrêt 
+nl = liste renversée que l'on compare à l   
+*)
+
+
+(* fusion ordre l1 l2 fusionne deux listes l1 et l2 selon l'ordre *)
+let rec fusion ordre l1 l2 =
+  match (l1, l2) with
+    [], [] -> []
+  | [], x -> x
+  | x, [] -> x
+  | x1::r1, x2::r2 -> if ordre x1 x2
+                      then x1::fusion ordre r1 (x2::r2)
+                      else x2::fusion ordre (x1::r1) r2;;
+
+
+(* tri_encerclement ordre l trie la liste l selon l’algorithme du tri par encerclement et
+l’ordre de tri ordre passé en paramètre *)
+let rec tri_encerclement ordre l =
+  if List.length l = 1
+  then l
+  else
+    let (l1, l2) = separer (encercler  ordre l) in
+          fusion ordre (tri_encerclement ordre l1)  (tri_encerclement ordre l2);;
+
+          
+(* temps_debut retourne le temps, en secondes, 
+que met le processeur de l’ordinateur pour faire le calcul d’un tri *)
+let temps_debut = Sys.time () in
+  let _ = tri_selection_min (<) l in
+  let temps_fin = Sys.time () in
+  temps_fin -. temps_debut;;
