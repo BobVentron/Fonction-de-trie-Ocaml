@@ -1,0 +1,164 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{hyperref}
+
+\pagestyle{headings}
+
+\title{Efficacité de quatre fonction de tris}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+\section{Introduction}
+
+Les fonctions de tries suivantes ont été réalisées dans la recherche de la fonction de trie la plus efficace selon un ordre et une liste donnée. La première fonction est la fonction de tri comptage, elle compte d’abord le nombre d’apparitions de chaque élément dans une liste selon un ordre choisi préalablement. Puis le tri par sélection du minimum, qui consiste tout simplement à placer le plus petit élément d’une liste en première position et ensuite de faire pareil pour le second plus petit dans la deuxième position jusqu’à quelle soit complétement triée. Nous avons aussi le tri de crêpes, qui fonctionne comme quand on voudrait ranger des crêpes selon leur taille en retournant la pile de façon à pouvoir obtenir une pile triée par taille. Et enfin le tri par encerclement, qui lui compare le premier et dernier élément afin de les échanger si c’est nécessaire et de faire même pour le second premier et second dernier élément jusqu’à quelle soit triée complétement. Elles ont fondamentalement le même but mais sont chacune réalisée de différentes façons. Nous analyserons alors pour chacune des fonctions, différents cas d’exécution qui nous permettrons de connaitre les points faibles et les points forts de celles-ci en plus de leurs temps d’exécution. De plus, la liste que l’on essaye pour chacune des fonctions est composée de valeurs générées aléatoirement par la fonction liste aléatoire b n qui renvoie une liste de n entiers compris entre 0 et (b - 1) inclus. 
+
+N.B. Les valeurs du tableau  \ref{montableau1}, du tableau  \ref{montableau2}, du tableau \ref{montableau3} et du tableau  \ref{montableau4} sont en secondes.
+
+\section{Tri comptage}
+\subsection{Des données}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{||c c|c|c|c|c||}\hline
+    \textbf{} & \textbf{nombre d'élement:} & \textbf{10} & \textbf{100} & \textbf{1000} & \textbf{10000}\\\hline\hline
+    \textbf{présence de doublons} & 	& 	& 	& 	&\\\hline
+    \textbf{beaucoup}           &	   & 7.00e-06    & 2.99e-05	& 0.00062	& 0.00168    \\\hline
+    \textbf{moyennement}        &  	   & 0.00014     & 0.00148      & 0.03709	& 0.60541    \\\hline
+    \textbf{peu}         	&          & 0.00145     & 0.01179      & 0.16403	& 4.18089    \\\hline
+  \end{tabular}
+  \caption{Tableau montrane l'efficacité de la fonction de tri comptage}
+  \label{montableau1}
+\end{table}
+
+\subsection{Des explications}
+
+Nous avons réalisé une analyse de la fonction tri comptage selon le nb d’élément présent dans la liste L et la présence de doublons dans celle-ci. Alors nous pouvons donc voir que plus nous avons de doublons dans l plus le trie sera efficace et cela peu importe le nombre d’éléments présents. Cependant, lorsqu’on a un taux de doublons moyen dans la liste, la fonction est bien plus lente à l’exécution et cela s’empire si l’on a très peu de doublons car on peut alors voir que pour une liste ayant peu de doublons et 10 éléments, elle prend autant de temps que si elle avait 10000 éléments et beaucoup de doublons. Le temps d’exécution de cette fonction monte alors jusqu’à 4 sec pour une liste de 10000 éléments et peu de doublons. 
+
+\subsection{Bilan provisoire}
+
+En conclusion, nous avons vu que la fonction tri comptage permet de trier des listes composées d’un nombre d’élément plutôt important si celle-ci ne possède pas un taux de doublons présents trop élevé avec alors un temps d’exécution qui varie entre environ 0.001 s et 4.2 s.
+
+
+\section{Tri par selection du minimum}
+\subsection{Des données}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{||c c|c|c|c|c||}\hline
+    \textbf{} & \textbf{nombre d'élement:} & \textbf{10} & \textbf{100} & \textbf{1000} & \textbf{10000}\\\hline\hline
+    \textbf{présence de doublons} & 	& 	& 	& 	&\\\hline
+    \textbf{beaucoup}           &	   & 1.5e-05     & 0.00074	& 0.07114	& 7.67893    \\\hline
+    \textbf{moyennement}        &  	   & 1.6e-05     & 0.00085      & 0.08585	& 9.92983    \\\hline
+    \textbf{peu}         	&          & 2.3e-05     & 0.00124      & 0.08717	& 9.50641    \\\hline
+  \end{tabular}
+  \caption{Tableau montrant l'efficacité de la fonction de tri par selection du minimum}
+  \label{montableau2}
+\end{table}
+
+\subsection{Des explications}
+
+La fonction de tri par sélection du minimum, nous montre ici des temps d’exécutions similaires lorsque la liste étudiée possède un taux de doublons bas ou moyen mais aussi lorsqu’il est élevé. On peut alors voir que les temps sont alors majoritairement les mêmes selon le nombre d’éléments et cela peut importe le taux de doublons présents dans la liste. Cependant, on observe une croissance exponentielle des temps d’exécutions quand le nombre d’éléments augmente. Le temps d’exécution varie entre 7 et 10 s d’exécution. 
+
+\subsection{Bilan provisoire}
+
+Pour conclure, nous pouvons alors dire que les temps d’exécutions de la fonction tri par sélection du minimum sont environ égaux mais qu’ils dépendent seulement du nombre d’éléments.
+
+\section{Tri crêpes}
+\subsection{Des données}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{||c c|c|c|c|c||}\hline
+    \textbf{} & \textbf{nombre d'élement:} & \textbf{10} & \textbf{100} & \textbf{1000} & \textbf{10000}\\\hline\hline
+    \textbf{présence de doublons} & 	& 	& 	& 	&\\\hline
+    \textbf{beaucoup}           &	   & 1.10e-05    & 0.00056	& 0.05707	& 6.50106    \\\hline
+    \textbf{moyennement}        &  	   & 1.40e-05    & 0.00075      & 0.07683	& 9.10319    \\\hline
+    \textbf{peu}         	&          & 1.99e-05    & 0.00096      & 0.07753	& 9.53334    \\\hline
+  \end{tabular}
+  \caption{Tableau montrant l'efficacité de la fonction de tri crêpes}
+  \label{montableau3}
+\end{table}
+
+\subsection{Des explications}
+
+Pour la fonction de tri crêpe, nous pouvons constater que le nombre de doublons à peu d’importance pour le temps d’exécution qui reste le même et cela de 0 à n, sauf pour une liste avec peu de doublons. On a, pour une liste de 10 éléments, un temps d’exécution stable mais lorsque l’on dépasse les 10 éléments, on peut voir que seulement la liste avec peu de doublons obtient un temps plus rapide. Donc, lorsque le nombre d’éléments augmente le temps d’exécution augmente aussi avec un temps qui varie de 0.1 s à 10 s ; le minimum étant 0.076 sec pour une liste avec peu de doublons. 
+
+\subsection{Bilan provisoire}
+
+En conclusion, la fonction tri crêpes est favorisé par la présence de peu de doublons, ce qui lui permet d’avoir temps d’exécution très rapide sans s’inquiéter de la taille de la liste. 
+
+\section{Tri par encerclement}
+\subsection{Des données}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{||c c|c|c|c|c||}\hline
+    \textbf{} & \textbf{nombre d'élement:} & \textbf{10} & \textbf{100} & \textbf{1000} & \textbf{10000}\\\hline\hline
+    \textbf{présence de doublons} & 	& 	& 	& 	&\\\hline
+    \textbf{beaucoup}           &	   & 1.99e-05    & 0.00019	& 0.00264	& 0.04200    \\\hline
+    \textbf{moyennement}        &  	   & 1.79e-05    & 0.00024      & 0.00364	& 0.04724    \\\hline
+    \textbf{peu}         	&          & 1.90e-05    & 0.00026      & 0.00367	& 0.04856    \\\hline
+  \end{tabular}
+  \caption{Tableau montrant l'efficacité de la fonction de trie par encerclement}
+  \label{montableau4}
+\end{table}
+
+\subsection{Des explications}
+
+Pour la fonction de tri par encerclement, nous observons des temps d’exécutions bien plus bas que les précédentes fonctions mais suivant toujours la même logique. On voit donc que le temps d’exécution dépend en grande partie du temps d’exécution car le taux de doublons dans la liste étudiée ne change pas les résultats obtenus. Les temps observés sont pour la plupart très similaires au point qu’ils en sont presque égaux. 
+
+\subsection{Bilan provisoire}
+
+En conclusion, la fonction de tri par encerclement présente des temps d’exécution similaires et cela peu importe le taux de doublon dans la liste, et donc ils augmentent seulement avec le nombre d’éléments dans la liste.
+
+\section{Comparaison des fonctions}
+Pour les 3 graphes qui vont suivre l'absisse est le nombre d'élément dans la liste et l'ordonne le temps que met la fonction à trier la liste.
+\subsection{Longueur de la liste à trier}
+
+\begin{center}
+  \includegraphics[scale=0.4]{llt2.png}
+\end{center}
+
+Ce graphe nous montre le comportement des fonctions avec différentes tailles de liste.
+
+\subsection{Doublons dans la liste}
+
+\begin{center}
+  \includegraphics[scale=0.4]{bd.png}
+\end{center}
+
+Sur cette représentation nous pouvons voir l'efficacité des 4 fonctions de tri quand il y a beaucoup de doublons.
+
+\subsection{Tri d'une liste déjâ triée}
+
+\begin{center}
+  \includegraphics[scale=0.4]{tldejat.png}
+\end{center}
+
+Ici nous pouvons voir l'efficacité de chaque fonction pour trier une liste déjâ triée.
+
+\subsection{Analyse}
+
+Après l’analyse individuelle de chaque fonction de tri, nous pouvons maintenant les comparer les unes aux autres. Dans le cas d’une liste déjà triée, nous observons sur le graphique que les tris 2 et 3 ont des temps d’exécution plein plus élevés que ceux des tris 1 et 4. Où le tri 4 a le temps d’exécution le plus faible. Ensuite, dans le cas d’une liste avec beaucoup de doublons, on a une situation similaire à la précédente, où les tris 2 et 3 ont un temps d’exécution semblables mais qui reste bien supérieurs à ceux des tries 1 et 4 avec comme temps le plus faible le tri 4. Et enfin dans le cas d’une liste dont seulement la longueur variable, le temps d’exécution de tri 2, cette fois-ci, est supérieur à celui du tri 3. Et les tri 1 et 4 ont les temps d’exécution les plus faibles avec le tri 4 ayant le plus faible des 4 tris.
+
+\section{Bilan}
+
+Finalement, à la suite de l’analyse complète de ces fonctions et leur comparaison, nous constatons alors que le tri par encerclement semble être la fonction de tri la plus efficace de toutes celles analysées ici. Car elle possède les temps d’exécutions les plus bas en prenant compte les différents paramètres qui varient avec une liste. Ensuite nous avons le tri par comptage qui, même s’il ne présente pas des résultats comme le tri 4, reste envisageable à utiliser pour une liste. Puis le tri par crêpes et enfin le tri par sélection du minimum qui, eux, ont un temps d’exécution trop grand pour le cas d’une liste avec des valeurs plus élevées.
+
+
+\end{document}
+
