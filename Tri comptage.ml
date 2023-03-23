@@ -82,3 +82,8 @@ let rec reconstituer l =
 e = élément dans l
 nb_e = nombre d'occurences de l'élémént e dans l    
 *)
+
+(* tri_comptage ordre l utilise les fonctions précédentes pour trier un liste l selon un ordre choisi *)
+let tri_comptage ordre l = 
+  let l1 = nb_chaque ordre l in
+  reconstituer l1;;
